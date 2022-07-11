@@ -20,6 +20,7 @@ public class TwentyTwentyOne_Day5 {
     public static void main(String[] args) {
         String[] inputArray = input.split(System.lineSeparator());
         List<Line> lineList = new ArrayList<>();
+        List<Line> diagLineList = new ArrayList<>();
         int answer = 0;
         int maxX = 0;
         int maxY = 0;
@@ -38,14 +39,18 @@ public class TwentyTwentyOne_Day5 {
             // check if a horizontal line
             if (line.x1 == line.x2 || line.y1 == line.y2) {
                 lineList.add(line);
+            } else { // diag line
+                diagLineList.add(line);
             }
         }
 
         // line list constructed
-        System.out.println(lineList.size());
+        System.out.println("Horizontal & Vertical Lines: " + lineList.size());
+        System.out.println("Diagonal Lines: " + diagLineList.size());
 
         int ventMap[][] = new int[1000][1000];
 
+        // process the horizontal lines
         for(Line line : lineList) {
             // get all points on the line
             if (line.x1 == line.x2) { // horizontal
@@ -79,12 +84,54 @@ public class TwentyTwentyOne_Day5 {
             }
         }
 
+        // process the diagonal lines
+        for(Line line : diagLineList) {
+            int cX = 0;
+            int cY = 0;
+            // up to the right
+            if (line.x1 < line.x2 && line.y1 > line.y2) {
+                cX = line.x1;
+                cY = line.y1;
+                while (cX <= line.x2) {
+                    ventMap[cX][cY]++;
+                    cX++; cY--;
+                }
+            }
+            // up to the left
+            else if (line.x2 < line.x1 && line.y2 < line.y1) {
+                cX = line.x1;
+                cY = line.y1;
+                while (cX >= line.x2) {
+                    ventMap[cX][cY]++;
+                    cX--; cY--;
+                }
+            }
+            // down to the right
+            else if (line.x1 < line.x2 && line.y1 < line.y2) {
+                cX = line.x1;
+                cY = line.y1;
+                while (cY <= line.y2) {
+                    ventMap[cX][cY]++;
+                    cX++; cY++;
+                }
+            }
+            // down to the left
+            else if (line.x2 < line.x1 && line.y1 < line.y2) {
+                cX = line.x1;
+                cY = line.y1;
+                while (cY <= line.y2) {
+                    ventMap[cX][cY]++;
+                    cX--; cY++;
+                }
+            }
+        }
 
+        printVentMap(ventMap);
 
         for (int x = 0; x < ventMap.length; x++) {
-            System.out.print("\n");
+//            System.out.print("\n");
             for (int y = 0; y < ventMap[x].length; y++) {
-                System.out.print(ventMap[x][y] + " ");
+//                System.out.print(ventMap[x][y] + " ");
                 if (ventMap[x][y] > 1) {
                     answer++;
                 }
@@ -94,6 +141,21 @@ public class TwentyTwentyOne_Day5 {
         System.out.println("\nNumber of points with more than 1 vent: " + answer);
     }
 
+
+    static void printVentMap(int[][] ventMap)  {
+
+        System.out.print("===================");
+        for (int y = 0; y < ventMap[0].length; y++) {
+            System.out.print("\n");
+            for (int x = 0; x < ventMap.length; x++) {
+                System.out.print(ventMap[x][y] + " ");
+            }
+        }
+        System.out.println("\n===================");
+
+    }
+
+    static String singleInput = "5,5 -> 8,2\n";
 
     static String testInput = "0,9 -> 5,9\n" +
             "8,0 -> 0,8\n" +
