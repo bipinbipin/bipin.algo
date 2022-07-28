@@ -8,8 +8,8 @@ public class PriorityQueueAlgo {
 
     public static void main(String[] args) {
 //        naturalStringOrdering();
-//        customOrdering();
-        customStudentOrdering();
+        customOrdering();
+//        customStudentOrdering();
     }
 
     static void naturalStringOrdering() {

@@ -17,6 +17,18 @@ public class TwentyTwentyOne_Day8 {
     9: 6
      */
     public static void main(String[] args) {
+        //part II
+        String topChar = "";
+        for(String line : testInput.split(System.lineSeparator())) {
+            String[] lineSections = line.split("\\|");
+            for(String digit : lineSections[0].trim().split(" ")) {
+//                if (digit.length() == )
+            }
+        }
+
+    }
+
+    static void partOne() {
         String[] lineArray = input.split(System.lineSeparator());
 
         int countOfKnown = 0;
@@ -31,7 +43,6 @@ public class TwentyTwentyOne_Day8 {
 
         System.out.println("Number of Known Digits: " + countOfKnown);
     }
-
 
     static String testInput = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe\n" +
             "edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc\n" +
